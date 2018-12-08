@@ -65,7 +65,7 @@ def put_temperature(mqtt, temperature):
         if temperature is None:
             put_text(mqtt, None)
         else:
-            temperature = '%.0fC' % (temperature * 10.0)
+            temperature = '%.0fC' % temperature
             put_text(mqtt, temperature)
     except:
         logging.error('Temperature processing failed', exc_info=True)
