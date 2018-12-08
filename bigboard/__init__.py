@@ -5,6 +5,7 @@ import logging
 import paho.mqtt.client
 import schedule
 import json
+import time
 
 __version__ = '1.0.0'
 
@@ -32,32 +33,48 @@ def job_tick(mqtt):
 def put_text(mqtt, text):
     if text is None:
         mqtt.publish('bigsegment/0/set', qos=1, payload='"-"')
+        time.sleep(0.2)
         mqtt.publish('bigsegment/1/set', qos=1, payload='"-"')
+        time.sleep(0.2)
         mqtt.publish('bigsegment/2/set', qos=1, payload='"-"')
+        time.sleep(0.2)
         mqtt.publish('bigsegment/3/set', qos=1, payload='"-"')
+        time.sleep(0.2)
         return
     if len(text) > 4:
         mqtt.publish('bigsegment/0/set', qos=1, payload='"-"')
+        time.sleep(0.2)
         mqtt.publish('bigsegment/1/set', qos=1, payload='"-"')
+        time.sleep(0.2)
         mqtt.publish('bigsegment/2/set', qos=1, payload='"-"')
+        time.sleep(0.2)
         mqtt.publish('bigsegment/3/set', qos=1, payload='"-"')
+        time.sleep(0.2)
         return
     if len(text) >= 1:
         mqtt.publish('bigsegment/3/set', qos=1, payload='"%s"' % text[-1])
+        time.sleep(0.2)
     else:
         mqtt.publish('bigsegment/3/set', qos=1, payload='" "')
+        time.sleep(0.2)
     if len(text) >= 2:
         mqtt.publish('bigsegment/2/set', qos=1, payload='"%s"' % text[-2])
+        time.sleep(0.2)
     else:
         mqtt.publish('bigsegment/2/set', qos=1, payload='" "')
+        time.sleep(0.2)
     if len(text) >= 3:
         mqtt.publish('bigsegment/1/set', qos=1, payload='"%s"' % text[-3])
+        time.sleep(0.2)
     else:
         mqtt.publish('bigsegment/1/set', qos=1, payload='" "')
+        time.sleep(0.2)
     if len(text) >= 4:
         mqtt.publish('bigsegment/0/set', qos=1, payload='"%s"' % text[-4])
+        time.sleep(0.2)
     else:
         mqtt.publish('bigsegment/0/set', qos=1, payload='" "')
+        time.sleep(0.2)
 
 
 def put_temperature(mqtt, temperature):
